@@ -1,4 +1,4 @@
-export const nullCleanser = (variable)=>{
+module.exports.nullCleanser = nullCleanser = (variable)=>{
     if(Array.isArray(variable)){
         if(variable.length <= 0) return variable = undefined
             variable.forEach((element, index, array)=>{
@@ -30,12 +30,12 @@ export const nullCleanser = (variable)=>{
     }
     return variable
 }
-export const ensureArray = (suspect)=>{
+module.exports.ensureArray = ensureArray = (suspect)=>{
     if(suspect == undefined) return undefined
     return Array.isArray(suspect) ? suspect : Array(suspect)
 }
 
-export const pipe = (value)=>{
+module.exports.pipe = pipe = (value)=>{
     return{
         result: value,
         then: (callback)=>{
@@ -43,12 +43,12 @@ export const pipe = (value)=>{
         }
     }
 }
-export const sleep = ms => new Promise(r => setTimeout(r, ms))
+module.exports.sleep = sleep = ms => new Promise(r => setTimeout(r, ms))
 
-export const randomInt = ({min, max})=>{
+module.exports.randomInt = randomInt = ({min, max})=>{
     return ~~(Math.random() * (max - min) + min)
 }
-export const randomStr = ({ length = 5, powerFactor = {number: 1, lowerAlphabet: 1, upperAlphabet: 1} })=>{
+module.exports.randomStr = randomStr = ({ length = 5, powerFactor = {number: 1, lowerAlphabet: 1, upperAlphabet: 1} })=>{
     /* Usage */
     // randomString({
     //     length: <result string length :Number>,
@@ -80,7 +80,7 @@ export const randomStr = ({ length = 5, powerFactor = {number: 1, lowerAlphabet:
     }
     return result;
 }
-export const gacchaExecutioneer = (objOption) => {
+module.exports.gacchaExecutioneer = gacchaExecutioneer = (objOption) => {
     /* Usage */
     // gacchaExecutioneer({
     //   <percentage 1-100 :Number>: <any function to run :Function>,
@@ -111,10 +111,10 @@ export const gacchaExecutioneer = (objOption) => {
 
 
 
-export const toRupiah = (number)=>{
+module.exports.toRupiah = toRupiah = (number)=>{
     return number.toString().split('.')[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".")
 }
-export const upperCaseSentence = ({sentence, removeSpace, strictCase})=>{
+module.exports.upperCaseSentence = upperCaseSentence = ({sentence, removeSpace, strictCase})=>{
     // upperCaseSentence({
     //     sentence: <sentence :String>,
     //     removeSpace: [boolean],
@@ -127,7 +127,7 @@ export const upperCaseSentence = ({sentence, removeSpace, strictCase})=>{
     if(removeSpace) result = result.replace(/\s+/gm, "")
     return result
 }
-export const typeCaseSentence = ({typeCase, sentence})=>{
+module.exports.typeCaseSentence = typeCaseSentence = ({typeCase, sentence})=>{
     // typeCaseSentence({
     //     typeCase: <"pascal"|"snake"|"dragon"|"camel"|"kebab"|"nocase">
     //     sentence: <sentence :String>
@@ -173,7 +173,7 @@ export const typeCaseSentence = ({typeCase, sentence})=>{
     return result
 }
 
-export const formatDate = (date) => {
+module.exports.formatDate = formatDate = (date) => {
     // formateDate({date: <dateObj :Date>})
     const
         now = date ? new Date(date) : new Date(),
@@ -183,13 +183,13 @@ export const formatDate = (date) => {
 
     return `${dd}-${mm}-${yyyy}`
 }   
-export const increaseDate = (inc) => {
+module.exports.increaseDate = increaseDate = (inc) => {
     // increaseDate(increment :Number)
     const now = new Date()
     return now.setDate(now.getDate()+inc)
 }
 
-export const rankedSearch = ({data, exposedProp, searchQuery}) => {
+module.exports.rankedSearch = rankedSearch = ({data, exposedProp, searchQuery}) => {
     /** 
      *  rankedSearchVicnity({
      *      data: <array of object :Array>
@@ -282,11 +282,11 @@ export const rankedSearch = ({data, exposedProp, searchQuery}) => {
 
     return data.sort((a, b) => b.rankPoint - a.rankPoint)
 }
-export const searchFullMatch = ({dataWord, queryWord})=>{
+module.exports.searchFullMatch = searchFullMatch = ({dataWord, queryWord})=>{
     if(dataWord.join("") == queryWord.join("")) return 10
     return 0
 }
-export const searchPositionMatch = ({dataWord, queryWord})=>{
+module.exports.searchPositionMatch = searchPositionMatch = ({dataWord, queryWord})=>{
     const pointDivider = queryWord.length
     let pointEval = 0
     let localPoint = 0, localPunishment = 0, localDivider = 0
@@ -353,7 +353,7 @@ export const searchPositionMatch = ({dataWord, queryWord})=>{
 
     return pointEval/pointDivider
 }
-export const searchOccurenceMatch = ({dataWord, queryWord})=>{
+module.exports.searchOccurenceMatch = searchOccurenceMatch = ({dataWord, queryWord})=>{
     const pointDivider = dataWord.length
     let pointEval = 0
     /** Dont wanna ruin and splice around the original query */
@@ -371,7 +371,7 @@ export const searchOccurenceMatch = ({dataWord, queryWord})=>{
 
     return pointEval/pointDivider
 }
-export const aggregator = ({rawObj, primaryCol, concatCol, concatVoluntary})=>{
+module.exports.aggregator = aggregator = ({rawObj, primaryCol, concatCol, concatVoluntary})=>{
     // aggregator({
     //     rawObj: <dbRes :Object>
     //     primaryCol: <dbRes id prop :String>
@@ -415,4 +415,3 @@ export const aggregator = ({rawObj, primaryCol, concatCol, concatVoluntary})=>{
 
     return product
 }
-
