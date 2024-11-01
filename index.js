@@ -34,6 +34,28 @@ module.exports.ensureArray = ensureArray = (suspect)=>{
     if(suspect == undefined) return undefined
     return Array.isArray(suspect) ? suspect : Array(suspect)
 }
+module.exports.notNull = notNull = (variable)=>{
+    const cleaned = nullCleanser(variable)
+
+    if(cleaned == null) return false
+    if(cleaned == undefined) return false
+    if(typeof cleaned == "object"){
+        /* Array */
+        if(Array.isArray(cleaned)){
+            if(cleaned.length < 1) return false
+        }
+        /* Object? */
+        else if(Object.keys(cleaned).length < 1) return false
+    }
+    if(typeof cleaned == "number"){
+        if(Number.isNaN(cleaned)) return false
+    }
+    if(typeof cleaned == "string"){
+        if(cleaned.length < 1) return false
+    }
+
+    return true
+}
 
 module.exports.pipe = pipe = (value)=>{
     return{
