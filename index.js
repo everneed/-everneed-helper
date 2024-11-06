@@ -56,6 +56,23 @@ module.exports.notNull = notNull = (variable)=>{
 
     return true
 }
+module.exports.required = required = ({payload, requiredParam})=>{
+    /* Usage */
+    // required({
+    //     payload: <payload :Object>,
+    //     requiredParam: [<param 1 :String>,...]
+    // })
+
+    const requiredKey = new Set(requiredParam)
+    const payloadKey = new Set(Object.keys(payload))
+
+    if(requiredKey.intersection(payloadKey).size < requiredKey.size){
+        const missingKey = Array(...requiredKey.difference(payloadKey)).join(", ")
+        
+        return {returningObejctError: "Missing required params", missingKey: missingKey}
+    }
+    return payload
+},
 
 module.exports.pipe = pipe = (value)=>{
     return{
