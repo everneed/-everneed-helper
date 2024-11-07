@@ -60,18 +60,50 @@ module.exports.required = required = ({payload, requiredParam})=>{
     /* Usage */
     // required({
     //     payload: <payload :Object>,
-    //     requiredParam: [<param 1 :String>,...]
+    //     requiredParam: [
+    //         <param 1 :String>|[<param opt1 :String>, <param opt 2 :String>,...]
+    //         ,...
+    //     ]
     // })
-
-    const requiredKey = new Set(requiredParam)
-    const payloadKey = new Set(Object.keys(payload))
-
-    if(requiredKey.intersection(payloadKey).size < requiredKey.size){
-        const missingKey = Array(...requiredKey.difference(payloadKey)).join(", ")
+    
+    const error = []
+    const normalExistence = requiredParam.filter(x=> typeof x == "string")
+    const optionExistence = requiredParam.filter(x=> Array.isArray(x))
+    
+    /* Normal Param Case */
+    if(normalExistence.length){
+        const payloadKey = new Set(Object.keys(payload))
+        const requiredKey = new Set(requiredParam.filter(x=> typeof x == "string"))
         
-        return {returningObejctError: "Missing required params", missingKey: missingKey}
+        if(requiredKey.intersection(payloadKey).size < requiredKey.size){
+            const missingKey = Array(...requiredKey.difference(payloadKey))
+            
+            error.push(...missingKey)
+        }
     }
-    return payload
+    /* Option Param Case */
+    if(optionExistence.length){
+        const payloadKey = new Set(Object.keys(payload))
+        const requiredKey = requiredParam.filter(x=> Array.isArray(x))
+        
+        for(const option of requiredKey){
+            const optionKey = new Set(option)
+
+            if(optionKey.intersection(payloadKey).size < 1){
+                const missingKey = option.join(" or ")
+                
+                error.push(missingKey)
+            }
+        }
+
+    }
+    
+    if(error.length){
+        return {returningObejctError: "Missing required params", missingKey: error.join(", ")}
+    }
+    else{
+        return payload
+    }
 },
 
 module.exports.pipe = pipe = (value)=>{
