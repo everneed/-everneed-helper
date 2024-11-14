@@ -243,7 +243,7 @@ module.exports.typeCaseSentence = typeCaseSentence = ({typeCase, sentence})=>{
 
     return result
 }
-module.exports.String.prototype.escape = function(){
+module.exports.escape = String.prototype.escape = function(){
     return this.replaceAll(/\!/g, "&excl;")
         .replaceAll(/\"/g, "&quot;")
         .replaceAll(/\#/g, "&num;")
@@ -279,7 +279,7 @@ module.exports.String.prototype.escape = function(){
         .replaceAll(/\£/g, "&pound;")
         .replaceAll(/\¥/g, "&yen;")
 }
-module.exports.String.prototype.unescape = function(){
+module.exports.unescape = String.prototype.unescape = function(){
     return this.replaceAll(/\&excl;/g, "!")
         .replaceAll(/\&quot;/g, `"`)
         .replaceAll(/\&num;/g, "#")
