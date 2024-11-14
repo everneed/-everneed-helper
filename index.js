@@ -104,7 +104,7 @@ module.exports.required = required = ({payload, requiredParam})=>{
     else{
         return payload
     }
-},
+}
 
 module.exports.pipe = pipe = (value)=>{
     return{
@@ -242,6 +242,78 @@ module.exports.typeCaseSentence = typeCaseSentence = ({typeCase, sentence})=>{
     }
 
     return result
+}
+module.exports.String.prototype.escape = function(){
+    return this.replaceAll(/\!/g, "&excl;")
+        .replaceAll(/\"/g, "&quot;")
+        .replaceAll(/\#/g, "&num;")
+        .replaceAll(/\$/g, "&dollar;")
+        .replaceAll(/\%/g, "&percnt;")
+        .replaceAll(/\&/g, "&amp;")
+        .replaceAll(/\'/g, "&apos;")
+        .replaceAll(/\(/g, "&lparen;")
+        .replaceAll(/\)/g, "&rparen;")
+        .replaceAll(/\*/g, "&ast;")
+        .replaceAll(/\+/g, "&plus;")
+        .replaceAll(/\,/g, "&comma;")
+        .replaceAll(/\-/g, "&#45;")
+        .replaceAll(/\./g, "&period;")
+        .replaceAll(/\//g, "&sol;")
+        .replaceAll(/\:/g, "&colon;")
+        .replaceAll(/\;/g, "&semi;")
+        .replaceAll(/\</g, "&lt;")
+        .replaceAll(/\=/g, "&equals;")
+        .replaceAll(/\>/g, "&gt;")
+        .replaceAll(/\?/g, "&quest;")
+        .replaceAll(/\@/g, "&commat;")
+        .replaceAll(/\[/g, "&lsqb;")
+        .replaceAll(/\\/g, "&bsol;")
+        .replaceAll(/\]/g, "&rsqb;")
+        .replaceAll(/\^/g, "&Hat;")
+        .replaceAll(/\_/g, "&lowbar;")
+        .replaceAll(/\`/g, "&grave;")
+        .replaceAll(/\~/g, "&tilde;")
+        .replaceAll(/\€/g, "&euro;")
+        .replaceAll(/\‚/g, "&sbquo;")
+        .replaceAll(/\¢/g, "&cent;")
+        .replaceAll(/\£/g, "&pound;")
+        .replaceAll(/\¥/g, "&yen;")
+}
+module.exports.String.prototype.unescape = function(){
+    return this.replaceAll(/\&excl;/g, "!")
+        .replaceAll(/\&quot;/g, `"`)
+        .replaceAll(/\&num;/g, "#")
+        .replaceAll(/\&dollar;/g, "$")
+        .replaceAll(/\&percnt;/g, "%")
+        .replaceAll(/\&amp;/g, "&")
+        .replaceAll(/\&apos;/g, "'")
+        .replaceAll(/\&lparen;/g, "(")
+        .replaceAll(/\&rparen;/g, ")")
+        .replaceAll(/\&ast;/g, "*")
+        .replaceAll(/\&plus;/g, "+")
+        .replaceAll(/\&comma;/g, ",")
+        .replaceAll(/\&#45;/g, "-")
+        .replaceAll(/\&period;/g, ".")
+        .replaceAll(/\&sol;/g, "/")
+        .replaceAll(/\&colon;/g, ":")
+        .replaceAll(/\&semi;/g, ";")
+        .replaceAll(/\&lt;/g, "<")
+        .replaceAll(/\&equals;/g, "=")
+        .replaceAll(/\&gt;/g, ">")
+        .replaceAll(/\&quest;/g, "?")
+        .replaceAll(/\&commat;/g, "@")
+        .replaceAll(/\&lsqb;/g, "[")
+        .replaceAll(/\&bsol;/g, "\\")
+        .replaceAll(/\&rsqb;/g, "]")
+        .replaceAll(/\&Hat;/g, "^")
+        .replaceAll(/\&lowbar;/g, "_")
+        .replaceAll(/\&grave;/g, "`")
+        .replaceAll(/\&tilde;/g, "~")
+        .replaceAll(/\&euro;/g, "€")
+        .replaceAll(/\&sbquo;/g, "‚")
+        .replaceAll(/\&cent;/g, "¢")
+        .replaceAll(/\&pound;/g, "£")
+        .replaceAll(/\&yen;/g, "¥")
 }
 
 module.exports.formatDate = formatDate = (date) => {
