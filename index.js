@@ -317,6 +317,21 @@ module.exports.unescape = String.prototype.unescape = function(){
         .replaceAll(/\&pound;/g, "£")
         .replaceAll(/\&yen;/g, "¥")
 }
+module.exports.switchPourStr = (...words)=>{
+    /* Usage */
+    // switchPourStr(<word :String>,...)
+    let result = ""
+    const highestLength = words.toSorted((a, b)=> b.length - a.length)[0].length
+    
+    for(let i=0; i<highestLength; i++){
+        for(const word of words){
+            if(i >= word.length) continue
+            result += word[i]
+        }
+    }
+
+    return result
+}
 
 module.exports.formatDate = formatDate = (date) => {
     // formateDate({date: <dateObj :Date>})
