@@ -99,7 +99,7 @@ module.exports.required = required = ({payload, requiredParam})=>{
     }
     
     if(error.length){
-        return {returningObejctError: "Missing required params", missingKey: error.join(", ")}
+        return {returningObjectError: "Missing required params", missingKey: error.join(", ")}
     }
     else{
         return payload
