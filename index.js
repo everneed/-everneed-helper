@@ -94,6 +94,12 @@ module.exports.required = required = ({payload, requiredParam})=>{
                 
                 error.push(missingKey)
             }
+            else if(optionKey.intersection(payloadKey).size > 1){
+                let missingKey = option.join(" or ")
+                missingKey += " (pick either one)"
+                
+                error.push(missingKey)
+            }
         }
 
     }
